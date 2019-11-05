@@ -26,9 +26,19 @@ cameraTrigger.onclick = function() {
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
-    cameraOutput.src = cameraSensor.toDataURL("image/webp");
+    cameraOutput.src = cameraSensor.toDataURL("image/png");
     cameraOutput.classList.add("taken");
     // track.stop();
+
+    $.ajax({
+        url: 'http://localhost:3000/wordprocess',
+        dataType: 'text',
+        data: { data: cameraOutput.src },
+        type: 'POST',
+        success: function(data) {
+          console.log(data);
+          }
+        });
 };
 
 // Start the video stream when the window loads
