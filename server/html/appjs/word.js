@@ -37,6 +37,7 @@ cameraTrigger.onclick = function() {
         type: 'POST',
         success: function(data) {
           console.log(data);
+          return false;  
           }
         });
 };

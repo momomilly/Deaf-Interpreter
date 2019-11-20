@@ -1,0 +1,9 @@
+วิธีรัน: npm run dev
+
+
+set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaf-interpreter-2019-keyfile.json
+
+
+
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaf-interpreter-2019-keyfile.json"
+$env:PROJECT_ID="deaf-interpreter-2019"
