@@ -1,9 +1,27 @@
 วิธีรัน: npm run dev
 
+npm install
 
+
+DOS COMMSND PROMPT
 set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaf-interpreter-2019-keyfile.json
 
 
 
+POWER SHELL
+
+gci env:
+
+
 $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaf-interpreter-2019-keyfile.json"
 $env:PROJECT_ID="deaf-interpreter-2019"
+
+
+$env:PROJECT_ID="deaffy"
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaffy.json"
+
+
+
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaffy.json"
+
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\JoyMonthita\Documents\GitHub\Deaf-Interpreter\server\deaffy-47f7dc569b65.json"

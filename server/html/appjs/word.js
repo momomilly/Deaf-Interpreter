@@ -12,17 +12,17 @@ const cameraView = document.querySelector("#camera--view"),
 function cameraStart() {
     navigator.mediaDevices
         .getUserMedia(constraints)
-        .then(function(stream) {
+        .then(function (stream) {
             track = stream.getTracks()[0];
             cameraView.srcObject = stream;
         })
-        .catch(function(error) {
+        .catch(function (error) {
             console.error("Oops. Something is broken.", error);
         });
 }
 
 // Take a picture when cameraTrigger is tapped
-cameraTrigger.onclick = function() {
+cameraTrigger.onclick = function () {
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
@@ -35,11 +35,29 @@ cameraTrigger.onclick = function() {
         dataType: 'text',
         data: { data: cameraOutput.src },
         type: 'POST',
-        success: function(data) {
-          console.log(data);
-          return false;  
-          }
-        });
+        success: function (result) {
+            $("#showthis").html("<strong>" + JSON.stringify(result) + "</strong>");
+            console.log(result);
+            var r = JSON.parse(result);
+            console.log(r.payload);
+            //
+            var image = 'out.png';
+            var aivalue = r.payload[0].displayName;
+            var score = r.payload[0].classification.score;
+            console.log(`aivalue=${aivalue}`);
+            // open new windows
+            // var win = window.open('show.html' + '?image=' + image + '&aivalue=' + aivalue, '_blank');
+            var win = window.open('/wordresult' + '?image=' + image + '&aivalue=' + aivalue + '&score=' + score, '_self');
+            if (win) {
+                //Browser has allowed it to be opened
+                win.focus();
+            } else {
+                //Browser has blocked it
+                alert('Please allow popups for this website');
+            }
+        }
+    });
+
 };
 
 // Start the video stream when the window loads

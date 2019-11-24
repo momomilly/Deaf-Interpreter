@@ -1,17 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <title>Deaf Interpreter</title>
-    <meta charset="utf-8">
+    <title>Word Result</title>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="/html/js/jquery-3.3.1.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/html/fonts/icomoon/style.css"> -->
+
+    <link rel="stylesheet" href="/html/css/bootstrap.min.css">
+
+    <!-- <link rel="stylesheet" href="/html/css/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/owl.carousel.min.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/owl.theme.default.min.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/owl.theme.default.min.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/jquery.fancybox.min.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/bootstrap-datepicker.css"> -->
+    <!-- <link rel="stylesheet" href="/html/fonts/flaticon/font/flaticon.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/aos.css"> -->
+    <!-- <link rel="stylesheet" href="/html/css/style.css"> -->
+
 </head>
 
-<body>
+<body style="background-color:black;">
 
-    <h1>My First Heading</h1>
-    <p>My first paragraph.</p>
 
+    <div style="width:100%;">
+        <span id="image" style='width:60%;'></span>
+        <span id="aivalue" style='float:right;text-align:center;font-size:300px;color:orange;width:50%;'></span>
+    </div>
+    <div style='text-align:right;'>
+        <div id="score" style="color:white;"></div>
+
+        <br>
+        <button class="btn btn-warning mr-2 mb-2" onclick="window.location.href = '/word';"
+            style='font-size: 16px;        border-radius: 30px; padding: 10px 30px;'>BACK</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning mr-2 mb-2" onclick="window.location.href = '/';"
+            style='font-size: 16px;        border-radius: 30px;        padding: 10px 30px;'>EXIT</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+
+    <script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+        $(function () {
+            // get page load ready here
+            var image = getUrlParameter('image');
+            var aivalue = getUrlParameter('aivalue');
+            var score = getUrlParameter('score');
+            console.log(`image = ${image}`);
+            console.log(`aivalue = ${aivalue}`);
+            console.log(`score = ${score}`);
+            $("#image").html("<img src=/html/" + image + " />");
+            $("#aivalue").html("<strong>" + aivalue + "</strong>");
+            $("#score").html("<strong>" + score + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        });
+    </script>
 </body>
 
 </html>

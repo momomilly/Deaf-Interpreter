@@ -21,6 +21,10 @@ app.get('/word', function (req, res) {
   res.sendFile(path.join(__dirname + '/html/word.html'));
 });
 
+app.get('/wordresult', function (req, res) {
+  res.sendFile(path.join(__dirname + '/html/wordresult.html'));
+});
+
 // ({
 //   keyFilename: './deaf-interpreter-2019-keyfile.json',
 //   projectId: 'deaf-interpreter-2019'
@@ -51,17 +55,24 @@ app.post('/wordprocess', function (req, res) {
   // var base64Data = req.rawBody.replace(/^data:image\/png;base64,/, "");
   var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
   // console.log(base64Data);
-  fs.writeFile("out.png", base64Data, 'base64', async function (err) {
+  fs.writeFile("html/out.png", base64Data, 'base64', async function (err) {
     const automl = require('@google-cloud/automl');
     const fs = require('fs');
 
     // Create client for prediction service.
     const client = new automl.PredictionServiceClient();
-
-    const projectId = "deaf-interpreter-2019";
     const computeRegion = "us-central1";
-    const modelId = "ICN7231782644998995968";
-    const filePath = "./out.png";
+  
+    // work -> old
+    // const projectId = "deaf-interpreter-2019";
+    // const modelId = "ICN7231782644998995968";
+  
+    // work -> new
+    const projectId = "deaffy";
+    const modelId = "ICN6834339977883549696";
+  
+    const filePath = "html/out.png";
+
     const scoreThreshold = "0.5";
 
     // Get the full path of the model.
@@ -92,6 +103,7 @@ app.post('/wordprocess', function (req, res) {
       console.log(`Predicted class name: ${result.displayName}`);
       console.log(`Predicted class score: ${result.classification.score}`);
     });
+    res.end(JSON.stringify(response));
   });
 });
 
