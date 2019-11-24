@@ -21,6 +21,10 @@ app.get('/word', function (req, res) {
   res.sendFile(path.join(__dirname + '/html/word.html'));
 });
 
+app.get('/sentence', function (req, res) {
+  res.sendFile(path.join(__dirname + '/html/CAMtest4.html'));
+});
+
 app.get('/wordresult', function (req, res) {
   res.sendFile(path.join(__dirname + '/html/wordresult.html'));
 });
