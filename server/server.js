@@ -21,6 +21,11 @@ app.get('/word', function (req, res) {
   res.sendFile(path.join(__dirname + '/html/word.html'));
 });
 
+
+app.get('/sentence', function (req, res) {
+  res.sendFile(path.join(__dirname + '/html/CAMtest4.html'));
+});
+
 // ({
 //   keyFilename: './deaf-interpreter-2019-keyfile.json',
 //   projectId: 'deaf-interpreter-2019'
