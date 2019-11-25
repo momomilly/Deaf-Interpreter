@@ -26,11 +26,15 @@ app.get('/sentence', function (req, res) {
 });
 
 app.get('/alphabet', function (req, res) {
-  res.sendFile(path.join(__dirname + '/html/CAMtest3.html'));
+  res.sendFile(path.join(__dirname + '/html/alphabet.html'));
 });
 
 app.get('/wordresult', function (req, res) {
   res.sendFile(path.join(__dirname + '/html/wordresult.html'));
+});
+
+app.get('/alphabetresult', function (req, res) {
+  res.sendFile(path.join(__dirname + '/html/alphabetresult.html'));
 });
 
 // ({
@@ -80,6 +84,63 @@ app.post('/wordprocess', function (req, res) {
     const modelId = "ICN6834339977883549696";
   
     const filePath = "html/out.png";
+
+    const scoreThreshold = "0.5";
+
+    // Get the full path of the model.
+    const modelFullId = client.modelPath(projectId, computeRegion, modelId);
+
+    // Read the file content for prediction.
+    const content = fs.readFileSync(filePath, 'base64');
+
+    const params = {};
+
+    if (scoreThreshold) {
+      params.score_threshold = scoreThreshold;
+    }
+
+    // Set the payload by giving the content and type of the file.
+    const payload = {};
+    payload.image = { imageBytes: content };
+
+    // params is additional domain-specific parameters.
+    // currently there is no additional parameters supported.
+    const [response] = await client.predict({
+      name: modelFullId,
+      payload: payload,
+      params: params,
+    });
+    console.log(`Prediction results:`);
+    response.payload.forEach(result => {
+      console.log(`Predicted class name: ${result.displayName}`);
+      console.log(`Predicted class score: ${result.classification.score}`);
+    });
+    res.end(JSON.stringify(response));
+  });
+});
+
+app.post('/alphabetprocess', function (req, res) {
+  // console.log(req.body)
+  // var base64Data = req.rawBody.replace(/^data:image\/png;base64,/, "");
+  var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
+  // console.log(base64Data);
+  fs.writeFile("html/alphabet.png", base64Data, 'base64', async function (err) {
+    const automl = require('@google-cloud/automl');
+    const fs = require('fs');
+
+    // Create client for prediction service.
+    const client = new automl.PredictionServiceClient();
+    const computeRegion = "us-central1";
+  
+    // work -> old
+    // const projectId = "deaf-interpreter-2019";
+    // const modelId = "ICN7231782644998995968";
+  
+    // work -> new
+    const projectId = "deaffy";
+    const modelId = "ICN6834339977883549696";
+  
+    const filePath = "html/alphabet.png";
 
     const scoreThreshold = "0.5";
 
