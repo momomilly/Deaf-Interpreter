@@ -67,9 +67,10 @@
                     <div class="btn btn-warning mr-2 mb-2" id="btnStop" onclick="recordStop()">
                         STOP RECORDING
                     </div>
+
+                    <video id="vid2" controls></video>
                 </div>
             </div>
-            <video id="vid2" controls></video>
         </div>
     </div>
     </div>
@@ -181,6 +182,14 @@
             else {
                 alert("The video does not recording yet.");
             }
+        }
+
+        function openNav() {
+            document.getElementById("preview").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("preview").style.width = "0%";
         }
     </script>
 
