@@ -81,7 +81,7 @@ app.post('/wordprocess', function (req, res) {
   
     // work -> new
     const projectId = "deaffy";
-    const modelId = "ICN6834339977883549696";
+    const modelId = "ICN2429256592361783296";
   
     const filePath = "html/out.png";
 
@@ -138,7 +138,7 @@ app.post('/alphabetprocess', function (req, res) {
   
     // work -> new
     const projectId = "deaffy";
-    const modelId = "ICN6834339977883549696";
+    const modelId = "ICN8411514641137532928";
   
     const filePath = "html/alphabet.png";
 
